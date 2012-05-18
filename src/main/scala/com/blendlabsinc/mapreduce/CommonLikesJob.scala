@@ -24,10 +24,13 @@ class CommonLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
 
 class CommonLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
   val personId = readKey(_.readUTF)
+
+  println(PersonHBaseStore.get(personId).get.name)
+
   perValue {
     valueInput => {
       val like = valueInput.readUTF
-      println(PersonHBaseStore.get(personId).get.name + ": " + like)
+      println(" - " + like)
     }
   }
 }

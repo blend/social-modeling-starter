@@ -6,9 +6,8 @@ import org.apache.hadoop.hbase.HBaseConfiguration
 class CommonLikesJobSpec extends Specification {
   "Common likes job" should {
     "calculate common likes" in {
-      val settings = new CommonLikesJobSettings
       new CommonLikesJob().run(
-        settings,
+        new CommonLikesJobSettings,
         HBaseConfiguration.create
       )
 
