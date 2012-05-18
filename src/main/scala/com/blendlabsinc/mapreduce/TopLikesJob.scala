@@ -32,7 +32,7 @@ class TopLikesJob extends HJob[NoSettings](
     HTaskID("Find common likes task"),
     HTaskConfigs(),
     HIO(
-      HTableSettingsQuery((settings: NoSettings) => PersonTable.query2),
+      HTableSettingsQuery((_: NoSettings) => PersonTable.query2),
       HTableOutput(PersonTable)
     ),
     new TopLikesMapper,
