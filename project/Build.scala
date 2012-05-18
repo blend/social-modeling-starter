@@ -12,10 +12,6 @@ object SocialModelingStarterBuild extends Build {
     "cloudera" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
   )
 
-  val commands = """
-  import com.blendlabsinc.shell.Commands._
-"""
-
   val appDependencies = Seq(
     "org.specs2" %% "specs2" % "1.8.2",
     "net.databinder" %% "dispatch-http" % "0.8.8",
@@ -30,7 +26,6 @@ object SocialModelingStarterBuild extends Build {
                                      base = file("."),
                                      settings = Project.defaultSettings ++ Seq(
                                        libraryDependencies ++= appDependencies,
-                                       resolvers ++= appResolvers,
-                                       initialCommands := commands
+                                       resolvers ++= appResolvers
                                      ))
 }
