@@ -27,12 +27,31 @@ object Graph {
     }
   }
 
-  private implicit val formats = Serialization.formats(FullTypeHints(List(classOf[Person])))
+  private implicit val formats = Serialization.formats(FullTypeHints(List(classOf[Person], classOf[Group])))
 
-  def getFriends(id: String = "me"): List[Person] = {
-    val url = dispatch.url("https://graph.facebook.com/" + id + "/friends") <<? Map("access_token" -> accessToken, "limit" -> "3")
+  private def apiURL(id: String, path: String, limit: Int, fields: String) =
+    dispatch.url("https://graph.facebook.com/" + id + "/" + path) <<? Map(
+      "fields" -> fields,
+      "access_token" -> accessToken,
+      "limit" -> limit.toString
+    )
+
+  def getFriends(id: String = "me", limit: Int = 20): List[Person] = {
+    val url = apiURL(id, "friends", fields = "id,name", limit = limit)
     dispatch.Http(url ># { json =>
       (json \ "data").extract[List[Person]]
     })
   }
+
+  def getGroups(id: String = "me", limit: Int = 50): List[Group] = {
+    val url = apiURL(id, "groups", fields = "id,name", limit = limit)
+    dispatch.Http(url ># { json =>
+      (json \ "data").extract[List[Group]]
+    })
+  }
+
+  def getFriendsWithGroups(id: String = "me", limitFriends: Int = 20): List[Person] =
+    getFriends(id, limit = limitFriends).map { friend =>
+      friend.withGroups(getGroups(friend.id))
+    }
 }
