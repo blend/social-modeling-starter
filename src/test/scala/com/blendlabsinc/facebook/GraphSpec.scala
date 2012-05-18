@@ -3,7 +3,7 @@ package com.blendlabsinc.facebook
 import org.specs2.mutable._
 
 class GraphSpec extends Specification {
-  val samplePersonId = "5"
+  val samplePersonId = "220920"
 
   "Graph.getFriends" should {
     "return my friends if no argument is given" in {
@@ -12,17 +12,17 @@ class GraphSpec extends Specification {
     }
   }
 
-  "Graph.getGroups" should {
-    "return groups of a user" in {
-      Graph.getGroups(samplePersonId, limit = 1).head.name must contain("I pledge")
+  "Graph.getLikes" should {
+    "return likes of a user" in {
+      Graph.getLikes(samplePersonId, limit = 1).head.name must contain("Raw Chips")
     }
   }
 
-  "Graph.getFriendsWithGroups" should {
-    "return friends and groups" in {
-      val firstFriend = Graph.getFriendsWithGroups(limitFriends = 1).head
-      firstFriend.name must equalTo("Chris Hughes")
-      firstFriend.groups.head.name must contain("I pledge")
+  "Graph.getFriendsWithLikes" should {
+    "return friends and likes" in {
+      val firstFriend = Graph.getFriendsWithLikes(limitFriends = 1).head
+      firstFriend.name must contain("Chris")
+      firstFriend.likes.head.name must contain("The New Yorker")
     }
   }
 }

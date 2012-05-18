@@ -26,4 +26,4 @@ Unarchive the file and run
     bin/start-hbase.sh
     sleep 5
     bin/hbase shell
-    hbase> create 'person', 'info', 'group'
+    hbase> create 'person', 'info', 'like'

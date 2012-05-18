@@ -27,7 +27,7 @@ object Graph {
     }
   }
 
-  private implicit val formats = Serialization.formats(FullTypeHints(List(classOf[Person], classOf[Group])))
+  private implicit val formats = Serialization.formats(FullTypeHints(List(classOf[Person], classOf[Like])))
 
   private def apiURL(id: String, path: String, limit: Int, fields: String) =
     dispatch.url("https://graph.facebook.com/" + id + "/" + path) <<? Map(
@@ -43,15 +43,15 @@ object Graph {
     })
   }
 
-  def getGroups(id: String = "me", limit: Int = 50): List[Group] = {
-    val url = apiURL(id, "groups", fields = "id,name", limit = limit)
+  def getLikes(id: String = "me", limit: Int = 50): List[Like] = {
+    val url = apiURL(id, "likes", fields = "id,name", limit = limit)
     dispatch.Http(url ># { json =>
-      (json \ "data").extract[List[Group]]
+      (json \ "data").extract[List[Like]]
     })
   }
 
-  def getFriendsWithGroups(id: String = "me", limitFriends: Int = 20): List[Person] =
+  def getFriendsWithLikes(id: String = "me", limitFriends: Int = 20): List[Person] =
     getFriends(id, limit = limitFriends).map { friend =>
-      friend.withGroups(getGroups(friend.id))
+      friend.withLikes(getLikes(friend.id))
     }
 }

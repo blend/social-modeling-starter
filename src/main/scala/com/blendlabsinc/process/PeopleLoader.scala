@@ -7,9 +7,9 @@ import com.blendlabsinc.schema.PersonHBaseStore
 object PeopleLoader extends scala.App {
   val limitFriends = if (args.length == 1) args(0).toInt else 1000
 
-  val people = Person(id = "me", name = "Me", groups = Graph.getGroups("me")) :: Graph.getFriendsWithGroups(limitFriends = limitFriends)
+  val people = Person(id = "me", name = "Me", likes = Graph.getLikes("me")) :: Graph.getFriendsWithLikes(limitFriends = limitFriends)
   people.foreach { person =>
     PersonHBaseStore.put(person)
-    println(" - " + person.name + " (id=" + person.id + ") in " + person.groups.length + " groups")
+    println(" - " + person.name + " (id=" + person.id + ") in " + person.likes.length + " likes")
   }
 }

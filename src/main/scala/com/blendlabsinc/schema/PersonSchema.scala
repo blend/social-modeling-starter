@@ -16,7 +16,7 @@ object PersonSchema extends Schema {
     val info = family[String, String, Any]("info")
     val name = column(info, "name", classOf[String])
 
-    val group = family[String, String, String]("group")
+    val like = family[String, String, String]("like")
   }
 
   class PersonRow(table: PersonTable, result: DeserializedResult) extends HRow[PersonTable, String](result, table) {
@@ -24,7 +24,7 @@ object PersonSchema extends Schema {
       Person(
         id = rowid,
         name = column(_.name).getOrElse(throw new Exception("Person has no name column")),
-        groups = (family(_.group).map { case (id, name) => Group(id, name) }).toList
+        likes = (family(_.like).map { case (id, name) => Like(id, name) }).toList
       )
   }
 
