@@ -37,7 +37,7 @@ class CommonGroupsJob extends HJob[CommonGroupsJobSettings](
 )
 
 object CommonGroupsJobSettings {
-  val MeId = "meId"
+  val MeId = "me"
 }
 
 // Adding constructor params here causes problems.
