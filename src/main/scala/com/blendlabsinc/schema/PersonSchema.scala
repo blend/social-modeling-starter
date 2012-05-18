@@ -5,7 +5,7 @@ import com.gravity.hbase.schema._
 import com.blendlabsinc.models._
 
 object PersonSchema extends Schema {
-  implicit val conf = new org.apache.hadoop.hbase.HBaseConfiguration
+  implicit val conf = HBaseConfiguration.create
 
   class PersonTable extends HbaseTable[PersonTable, String, PersonRow](
     tableName = "person",
