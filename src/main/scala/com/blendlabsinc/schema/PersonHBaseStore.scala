@@ -7,6 +7,7 @@ object PersonHBaseStore {
     PersonSchema.PersonTable
       .put(person.id)
       .value(_.name, person.name)
+      .valueMap(_.group, (person.groups.map { group => group.id -> group.name }).toMap)
       .execute()
 
   def me = get("me")
