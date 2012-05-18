@@ -9,6 +9,8 @@ object PersonHBaseStore {
       .value(_.name, person.name)
       .execute()
 
+  def me = get(PersonSchema.PersonTable.query2.withKey("me").single())
+
   def get(row: PersonSchema.PersonRow): Person =
     Person(
       id = row.rowid,

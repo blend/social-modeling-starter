@@ -12,13 +12,14 @@ import com.blendlabsinc.schema._
 import com.blendlabsinc.schema.PersonSchema.PersonTable
 
 class CommonGroupsMapper extends FromTableBinaryMapperFx(PersonTable) {
+  val me = PersonHBaseStore.me
   val person = PersonHBaseStore.get(row)
 
-  // TODO
+  // TODO output (person id, groupid, true)
 }
 
 class CommonGroupsReducer extends ToTableBinaryReducerFx(PersonTable) {
-  // TODO
+  // TODO output
 }
 
 class CommonGroupsJob extends HJob[CommonGroupsJobSettings](
@@ -35,8 +36,20 @@ class CommonGroupsJob extends HJob[CommonGroupsJobSettings](
   )
 )
 
+object CommonGroupsJobSettings {
+  val MeId = "meId"
+}
+
 // Adding constructor params here causes problems.
-class CommonGroupsJobSettings extends SettingsBase
+class CommonGroupsJobSettings extends SettingsBase {
+  var meId : String = _
+
+  override def fromSettings(conf: Configuration) {
+  }
+
+  override def toSettings(conf: Configuration) {
+  }
+}
 
 object CommonGroupsQuery {
   def apply(settings: CommonGroupsJobSettings) = PersonTable.query2
