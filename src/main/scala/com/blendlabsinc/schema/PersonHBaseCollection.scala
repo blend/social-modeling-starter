@@ -9,7 +9,7 @@ object PersonHBaseCollection {
     PersonSchema.PersonTable
       .put(person.id)
       .value(_.name, person.name)
-      .valueMap(_.like, (person.likes.map { like => like.id -> like.name }).toMap)
+      .valueMap(_.like, person.likes.map(like => like.id -> like.name).toMap)
       .execute()
 
   def me = get(Me).getOrElse(throw new Exception("me not found."))
