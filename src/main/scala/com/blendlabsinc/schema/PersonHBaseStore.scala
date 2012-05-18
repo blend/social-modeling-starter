@@ -10,7 +10,7 @@ object PersonHBaseStore {
       .valueMap(_.group, (person.groups.map { group => group.id -> group.name }).toMap)
       .execute()
 
-  def me = get("me")
+  def me = get("me").getOrElse(throw new Exception("me not found."))
 
   def get(id: String): Option[Person] =
     PersonSchema.PersonTable.query2

@@ -15,11 +15,21 @@ class CommonGroupsMapper extends FromTableBinaryMapperFx(PersonTable) {
   val me = PersonHBaseStore.me
   val person = row.toPerson
 
-  // TODO output (person id, groupid, true)
+  for (group <- person.groups.intersect(me.groups).toList) {
+    val keyOutput = makeWritable(_.writeUTF(person.id))
+    val valueOutput = makeWritable(_.writeUTF(group.name))
+    write(keyOutput, valueOutput)
+  }
 }
 
 class CommonGroupsReducer extends ToTableBinaryReducerFx(PersonTable) {
-  // TODO output
+  val personId = readKey(_.readUTF)
+  perValue {
+    valueInput => {
+      val group = valueInput.readUTF
+      println(PersonHBaseStore.get(personId) + ": " + group)
+    }
+  }
 }
 
 class CommonGroupsJob extends HJob[CommonGroupsJobSettings](
