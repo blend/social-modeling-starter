@@ -1,7 +1,7 @@
 social-modeling-starter
 =======================
 
-Facebook social data modeling with Scala, HBase, and HPaste
+Facebook social data modeling with Scala, HBase, and HPaste.
 
 Setup
 -----------------------
