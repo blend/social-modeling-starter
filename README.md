@@ -8,10 +8,12 @@ Setup
 
 Visit https://developers.facebook.com/tools/explorer?method=GET&path=me .
 Click "Get Access Token". Select the following permissions:
-- User Data Permissions > user_groups
-- User Data Permissions > user_likes
-- Friends Data Permissions > friends_groups
-- Friends Data Permissions > friends_likes
+* User Data Permissions
+    * user_groups
+    * user_likes
+* Friends Data Permissions
+    * friends_groups
+    * friends_likes
 
 Click "Get Access Token", then "Allow". Copy and paste the Access Token.
 In your console, run:
