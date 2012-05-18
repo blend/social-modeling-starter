@@ -2,7 +2,7 @@ package com.blendlabsinc.mapreduce
 
 import com.gravity.hbase.mapreduce._
 import com.gravity.hbase.schema.makeWritable
-
+import scala.collection.JavaConversions._
 import com.blendlabsinc.schema.PersonHBaseCollection
 import com.blendlabsinc.schema.PersonSchema.PersonTable
 
@@ -17,10 +17,7 @@ class TopLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
 
 class TopLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
   val like = readKey(_.readUTF)
-
-  var sum = 0
-  perValue(valueInput => sum += valueInput.readInt)
-
+  val sum = values.size
   if (sum > 20)
     println((like, sum))
 }
