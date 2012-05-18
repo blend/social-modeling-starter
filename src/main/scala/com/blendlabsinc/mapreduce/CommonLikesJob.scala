@@ -24,9 +24,10 @@ class CommonLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
   }
   println(person.name)
 
-  val personId = readKey(_.readUTF)
-  println(PersonHBaseCollection.get(personId).get.name)
-  perValue(_.readUTF andThen (like => println(" - " + like)))
+  perValue(valueInput => {
+    val like = valueInput.readUTF
+    println("- " + like)
+  })
 }
 
 class CommonLikesJob extends HJob[NoSettings](
