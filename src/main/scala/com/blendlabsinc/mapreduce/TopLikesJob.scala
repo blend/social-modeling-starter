@@ -16,10 +16,10 @@ class TopLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
 }
 
 class TopLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
-  val sum = values.size
-  if (sum > 20) {
+  val totalLikers = values.size
+  if (totalLikers > 20) {
     val like = readKey(_.readUTF)
-    println((like, sum))
+    println((like, totalLikers))
   }
 }
 
