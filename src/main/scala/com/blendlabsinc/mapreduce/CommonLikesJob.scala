@@ -35,7 +35,7 @@ class CommonLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
   }
 }
 
-class CommonLikesJob extends HJob[CommonLikesJobSettings](
+class CommonLikesJob extends HJob[NoSettings](
   "Find common likes",
   HMapReduceTask(
     HTaskID("Find common likes task"),
@@ -49,17 +49,6 @@ class CommonLikesJob extends HJob[CommonLikesJobSettings](
   )
 )
 
-object CommonLikesJobSettings {
-}
-
-class CommonLikesJobSettings extends SettingsBase {
-  override def fromSettings(conf: Configuration) {
-  }
-
-  override def toSettings(conf: Configuration) {
-  }
-}
-
 object CommonLikesQuery {
-  def apply(settings: CommonLikesJobSettings) = PersonTable.query2
+  def apply(settings: NoSettings) = PersonTable.query2
 }
