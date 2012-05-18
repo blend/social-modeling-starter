@@ -10,4 +10,8 @@ case class Person(id: String, name: String, likes: List[Like]) {
   def friendLikes {
     new CommonLikesJob().run(Settings.None, HBaseConfiguration.create)
   }
+
+  def topLikes {
+    new TopLikesJob().run(Settings.None, HBaseConfiguration.create)
+  }
 }
