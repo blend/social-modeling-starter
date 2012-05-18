@@ -47,13 +47,9 @@ class CommonGroupsJob extends HJob[CommonGroupsJobSettings](
 )
 
 object CommonGroupsJobSettings {
-  val MeId = "me"
 }
 
-// Adding constructor params here causes problems.
 class CommonGroupsJobSettings extends SettingsBase {
-  var meId : String = _
-
   override def fromSettings(conf: Configuration) {
   }
 
