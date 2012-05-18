@@ -15,6 +15,7 @@ Click "Get Access Token". Select the following permissions:
 
 Click "Get Access Token", then "Allow". Copy and paste the Access Token.
 In your console, run:
+
    export FACEBOOK_ACCESS_TOKEN=<your access token>
 
 Download Cloudera's HBase distribution (CDH4 Beta 2) at
