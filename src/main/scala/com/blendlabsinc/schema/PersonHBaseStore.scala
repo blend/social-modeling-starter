@@ -14,6 +14,7 @@ object PersonHBaseStore {
   def get(row: PersonSchema.PersonRow): Person =
     Person(
       id = row.rowid,
-      name = row.column(_.name).getOrElse(throw new Exception("Person has no name column"))
+      name = row.column(_.name).getOrElse(throw new Exception("Person has no name column")),
+      groups = Nil
     )
 }
