@@ -29,3 +29,7 @@ Unarchive the file and run
     sleep 5
     bin/hbase shell
     hbase> create 'person', 'info', 'like'
+
+To load your Facebook data, run
+
+    ./bin/load.sh
