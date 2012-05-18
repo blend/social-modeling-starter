@@ -36,14 +36,14 @@ object Graph {
 
   def getFriends(id: String = "me", limit: Int = 20): List[Person] = {
     val url = apiURL(id, "friends", fields = "id,name", limit = limit)
-    dispatch.Http(url ># { json =>
-      (json \ "data").extract[List[Person]]
-    })
+    Http(url ># { json =>
+      (json \ "data")
+    }).extract[List[Person]]
   }
 
   def getLikes(id: String = "me", limit: Int = 500): List[Like] = {
     val url = apiURL(id, "likes", fields = "id,name", limit = limit)
-    dispatch.Http(url ># { json =>
+    Http(url ># { json =>
       (json \ "data").extract[List[Like]]
     })
   }
