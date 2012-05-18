@@ -2,11 +2,12 @@ package com.blendlabsinc.schema
 
 import com.blendlabsinc.models.Person
 
-object PersonHBaseStore {
-  def mkHBasePutOperation(person: Person, personId: String) =
+object PersonHBaseCollection {
+  def put(person: Person) =
     PersonSchema.PersonTable
-      .put(personId)
+      .put(person.id)
       .value(_.name, person.name)
+      .execute()
 
   def get(row: PersonSchema.PersonRow): Person =
     Person(
