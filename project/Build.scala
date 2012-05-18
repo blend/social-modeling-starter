@@ -24,7 +24,10 @@ object SocialModelingStarterBuild extends Build {
     "org.specs2" %% "specs2" % "1.8.2",
     "net.databinder" %% "dispatch-http" % "0.8.8",
     "net.databinder" %% "dispatch-json" % "0.8.8",
-    "net.databinder" %% "dispatch-lift-json" % "0.8.5"
+    "net.databinder" %% "dispatch-lift-json" % "0.8.5",
+    "com.gravity" % "gravity-hpaste" % "0.1.5",
+    "org.apache.hbase" % "hbase" % "0.90.4-cdh3u4",
+    "org.apache.hadoop" % "hadoop-core" % "0.20.2-cdh3u4"
   )
 
   lazy val common = Project(id = "social-modeling-starter",
