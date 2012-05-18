@@ -7,9 +7,11 @@ import com.blendlabsinc.schema.PersonHBaseCollection
 object PeopleLoader extends scala.App {
   val limitFriends = if (args.length == 1) args(0).toInt else 1000
 
-  val people =
-    Person(id = "me", name = "Me", likes = Graph.getLikes("me")) ::
-    Graph.getFriendsWithLikes(limitFriends = limitFriends)
+  val me = Person(id = PersonHBaseCollection.Me,
+                  name = "Me",
+                  likes = Graph.getLikes("me"))
+
+  val people = me :: Graph.getFriendsWithLikes(limitFriends = limitFriends)
 
   for (person <- people) {
     PersonHBaseCollection.put(person)

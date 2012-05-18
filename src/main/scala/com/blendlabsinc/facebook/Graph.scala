@@ -11,16 +11,16 @@ import net.liftweb.json.JsonAST._
 import com.blendlabsinc.models._
 
 object Graph {
-  private val accessTokenEnvName = "FACEBOOK_ACCESS_TOKEN"
+  private val AccessTokenEnvName = "FACEBOOK_ACCESS_TOKEN"
 
   private def accessToken =
-    Option(System.getenv(accessTokenEnvName)).getOrElse(
+    Option(System.getenv(AccessTokenEnvName)).getOrElse(
       throw new Exception(
-        "The " + accessTokenEnvName +" environment variable is not set. To get " +
+        "The " + AccessTokenEnvName +" environment variable is not set. To get " +
         "your Facebook access token, go to " +
         "https://developers.facebook.com/tools/explorer?method=GET&path=me " +
         "and use the value in the \"Access Token:\" field. Then run " +
-        "`export " + accessTokenEnvName + "=\"your access token\"` " +
+        "`export " + AccessTokenEnvName + "=\"your access token\"` " +
         "in your shell."
       ))
 

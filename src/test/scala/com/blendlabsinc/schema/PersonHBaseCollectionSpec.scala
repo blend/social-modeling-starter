@@ -4,7 +4,10 @@ import org.specs2.mutable._
 import com.blendlabsinc.models.{Person,Like}
 
 class PersonHBaseCollectionSpec extends Specification {
-  val person = Person(id = "myId", name = "John Smith", likes = List(Like(id = "myLikeId", name = "myLike")))
+  val person = Person(id = "myId",
+                      name = "John Smith",
+                      likes = List(Like(id = "myLikeId", name = "myLike")))
+
   "PersonHBaseCollection" should {
     "put and get" in {
       PersonHBaseCollection.put(person)
