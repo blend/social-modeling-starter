@@ -27,7 +27,7 @@ class CommonGroupsReducer extends ToTableBinaryReducerFx(PersonTable) {
   perValue {
     valueInput => {
       val group = valueInput.readUTF
-      println(PersonHBaseStore.get(personId) + ": " + group)
+      println(PersonHBaseStore.get(personId).get.name + ": " + group)
     }
   }
 }
