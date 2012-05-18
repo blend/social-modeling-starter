@@ -7,12 +7,10 @@ import com.blendlabsinc.schema.PersonHBaseCollection
 import com.blendlabsinc.schema.PersonSchema.PersonTable
 
 class TopLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
-  val me = PersonHBaseCollection.me
   val person = row.toPerson
-
-  for (like <- person.likes.intersect(me.likes)) {
+  for (like <- person.likes) {
     val keyOutput = makeWritable(_.writeUTF(like.name))
-    val valueOutput = makeWritable(_.writeBoolean(true))
+    val valueOutput = makeWritable(_.writeInt(1))
     write(keyOutput, valueOutput)
   }
 }
@@ -21,9 +19,10 @@ class TopLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
   val like = readKey(_.readUTF)
 
   var sum = 0
-  perValue(_ => sum += 1)
+  perValue(valueInput => sum += valueInput.readInt)
 
-  println((like, sum))
+  if (sum > 20)
+    println((like, sum))
 }
 
 class TopLikesJob extends HJob[NoSettings](
