@@ -1,16 +1,15 @@
 package com.blendlabsinc.schema
 
 import org.specs2.mutable._
-
 import com.blendlabsinc.models.{Person,Like}
 
-class PersonHBaseStoreSpec extends Specification {
+class PersonHBaseCollectionSpec extends Specification {
   val person = Person(id = "myId", name = "John Smith", likes = List(Like(id = "myLikeId", name = "myLike")))
-  "PersonHBaseStore" should {
+  "PersonHBaseCollection" should {
     "put and get" in {
-      PersonHBaseStore.put(person)
+      PersonHBaseCollection.put(person)
       java.lang.Thread.sleep(500)
-      val person2 = PersonHBaseStore.get("myId").get
+      val person2 = PersonHBaseCollection.get("myId").get
       person2.id must equalTo("myId")
       person2.name must equalTo("John Smith")
       person2.likes.length must equalTo(1)

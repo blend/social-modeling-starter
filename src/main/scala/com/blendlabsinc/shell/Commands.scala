@@ -1,7 +1,7 @@
 package com.blendlabsinc.shell
 
-import com.blendlabsinc.schema.PersonHBaseStore
+import com.blendlabsinc.schema.PersonHBaseCollection
 
 object Commands {
-  def me = PersonHBaseStore.me
+  def me = PersonHBaseCollection.me
 }

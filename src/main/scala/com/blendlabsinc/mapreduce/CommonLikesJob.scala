@@ -1,17 +1,13 @@
 package com.blendlabsinc.mapreduce
 
-import org.apache.hadoop.conf.Configuration
-
 import com.gravity.hbase.mapreduce._
-import com.gravity.hbase.mapreduce.{HMapReduceTask, HJob}
-import com.gravity.hbase.schema._
+import com.gravity.hbase.schema.makeWritable
 
-import com.blendlabsinc.models._
-import com.blendlabsinc.schema._
+import com.blendlabsinc.schema.PersonHBaseCollection
 import com.blendlabsinc.schema.PersonSchema.PersonTable
 
 class CommonLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
-  val me = PersonHBaseStore.me
+  val me = PersonHBaseCollection.me
   val person = row.toPerson
 
   for (like <- person.likes.intersect(me.likes)) {
@@ -22,8 +18,14 @@ class CommonLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
 }
 
 class CommonLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
+  val person = {
+    val personId = readKey(_.readUTF)
+    PersonHBaseCollection.get(personId).get
+  }
+  println(person.name)
+
   val personId = readKey(_.readUTF)
-  println(PersonHBaseStore.get(personId).get.name)
+  println(PersonHBaseCollection.get(personId).get.name)
   perValue(_.readUTF andThen (like => println(" - " + like)))
 }
 
