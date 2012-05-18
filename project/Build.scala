@@ -1,9 +1,6 @@
 import sbt._
 import Keys._
 
-import org.ensime.sbt.Plugin.Settings.ensimeConfig
-import org.ensime.sbt.util.SExp._
-
 object SocialModelingStarterBuild extends Build {
   val appVersion = "0.1"
 
