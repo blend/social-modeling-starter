@@ -43,7 +43,7 @@ object Graph {
     })
   }
 
-  def getLikes(id: String = "me", limit: Int = 50): List[Like] = {
+  def getLikes(id: String = "me", limit: Int = 500): List[Like] = {
     val url = apiURL(id, "likes", fields = "id,name", limit = limit)
     dispatch.Http(url ># { json =>
       (json \ "data").extract[List[Like]]
