@@ -13,7 +13,7 @@ import com.blendlabsinc.schema.PersonSchema.PersonTable
 
 class CommonGroupsMapper extends FromTableBinaryMapperFx(PersonTable) {
   val me = PersonHBaseStore.me
-  val person = PersonHBaseStore.get(row)
+  val person = row.toPerson
 
   // TODO output (person id, groupid, true)
 }

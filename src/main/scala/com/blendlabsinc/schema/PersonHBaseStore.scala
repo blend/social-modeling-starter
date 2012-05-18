@@ -9,12 +9,12 @@ object PersonHBaseStore {
       .value(_.name, person.name)
       .execute()
 
-  def me = get(PersonSchema.PersonTable.query2.withKey("me").single())
+  def me = get("me")
 
-  def get(row: PersonSchema.PersonRow): Person =
-    Person(
-      id = row.rowid,
-      name = row.column(_.name).getOrElse(throw new Exception("Person has no name column")),
-      groups = Nil
-    )
+  def get(id: String): Option[Person] =
+    PersonSchema.PersonTable.query2
+      .withKey(id)
+      .singleOption()
+      .map(_.toPerson)
+
 }

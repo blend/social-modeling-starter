@@ -19,7 +19,14 @@ object PersonSchema extends Schema {
     val group = family[String, String, Any]("group")
   }
 
-  class PersonRow(table: PersonTable, result: DeserializedResult) extends HRow[PersonTable, String](result, table)
+  class PersonRow(table: PersonTable, result: DeserializedResult) extends HRow[PersonTable, String](result, table) {
+    def toPerson: Person =
+      Person(
+        id = rowid,
+        name = column(_.name).getOrElse(throw new Exception("Person has no name column")),
+        groups = Nil
+      )
+  }
 
   val PersonTable = table(new PersonTable)
 }
