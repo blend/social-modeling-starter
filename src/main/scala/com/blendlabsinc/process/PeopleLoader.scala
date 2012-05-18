@@ -1,11 +1,11 @@
 package com.blendlabsinc.process
 
 import com.blendlabsinc.facebook.Graph
-import com.blendlabsinc.schema.PersonHBaseCollection
+import com.blendlabsinc.schema.PersonHBaseStore
 
 object PeopleLoader extends scala.App {
   Graph.getFriends().foreach { friend =>
-    PersonHBaseCollection.put(friend)
+    PersonHBaseStore.put(friend)
     println(" - " + friend.name + " (id=" + friend.id + ")")
   }
 }

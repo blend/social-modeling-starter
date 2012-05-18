@@ -2,7 +2,7 @@ package com.blendlabsinc.schema
 
 import com.blendlabsinc.models.Person
 
-object PersonHBaseCollection {
+object PersonHBaseStore {
   def put(person: Person) =
     PersonSchema.PersonTable
       .put(person.id)
