@@ -21,6 +21,10 @@ object SocialModelingStarterBuild extends Build {
 
   val liftVersion = "2.4" // Put the current/latest lift version here
 
+  val commands = """
+  import com.blendlabsinc.shell.Commands._
+"""
+
   val appDependencies = Seq(
     "org.specs2" %% "specs2" % "1.8.2",
     "net.databinder" %% "dispatch-http" % "0.8.8",
@@ -35,6 +39,7 @@ object SocialModelingStarterBuild extends Build {
                             base = file("."),
                             settings = Project.defaultSettings ++ Seq(
                               libraryDependencies ++= appDependencies,
-                              resolvers ++= appResolvers
+                              resolvers ++= appResolvers,
+                              initialCommands := commands
                             ))
 }
