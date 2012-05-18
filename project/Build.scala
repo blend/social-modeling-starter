@@ -7,19 +7,10 @@ import org.ensime.sbt.util.SExp._
 object SocialModelingStarterBuild extends Build {
   val appVersion = "0.1"
 
-  val ensimeConfig_ = sexp(
-    key(":formatting-prefs"), sexp(
-      key(":alignParameters"), true,
-      key(":preserveDanglingCloseParenthesis"), true
-    )
-  )
-
   val appResolvers = Seq(
     "Maven Repository" at "http://repo1.maven.org/maven2/",
     "cloudera" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
   )
-
-  val liftVersion = "2.4" // Put the current/latest lift version here
 
   val commands = """
   import com.blendlabsinc.shell.Commands._
@@ -35,11 +26,11 @@ object SocialModelingStarterBuild extends Build {
     "org.apache.hadoop" % "hadoop-core" % "0.20.2-cdh3u4"
   )
 
-  lazy val common = Project(id = "social-modeling-starter",
-                            base = file("."),
-                            settings = Project.defaultSettings ++ Seq(
-                              libraryDependencies ++= appDependencies,
-                              resolvers ++= appResolvers,
-                              initialCommands := commands
-                            ))
+  lazy val social_modeling = Project(id = "social-modeling-starter",
+                                     base = file("."),
+                                     settings = Project.defaultSettings ++ Seq(
+                                       libraryDependencies ++= appDependencies,
+                                       resolvers ++= appResolvers,
+                                       initialCommands := commands
+                                     ))
 }
