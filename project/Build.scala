@@ -15,7 +15,8 @@ object SocialModelingStarterBuild extends Build {
   )
 
   val appResolvers = Seq(
-    "Maven Repository" at "http://repo1.maven.org/maven2/"
+    "Maven Repository" at "http://repo1.maven.org/maven2/",
+    "cloudera" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
   )
 
   val liftVersion = "2.4" // Put the current/latest lift version here
@@ -26,7 +27,7 @@ object SocialModelingStarterBuild extends Build {
     "net.databinder" %% "dispatch-json" % "0.8.8",
     "net.databinder" %% "dispatch-lift-json" % "0.8.5",
     "com.gravity" % "gravity-hpaste" % "0.1.5",
-    "org.apache.hbase" % "hbase" % "0.90.4-cdh3u4",
+    "org.apache.hbase" % "hbase" % "0.92.1-cdh4.0.0b2",
     "org.apache.hadoop" % "hadoop-core" % "0.20.2-cdh3u4"
   )
 
