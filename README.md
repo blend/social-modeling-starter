@@ -33,3 +33,9 @@ Unarchive the file and run
 To load your Facebook data, run
 
     ./bin/load.sh
+
+Two MapReduce calculations are included: "friend likes" and "top
+likes". To execute these, run
+
+    ./bin/topLikes.sh
+    ./bin/friendLikes.sh
