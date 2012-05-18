@@ -12,8 +12,9 @@ Click "Get Access Token". Select the following permissions:
 - "User Data Permissions > user_likes"
 - "Friends Data Permissions > friends_groups"
 - "Friends Data Permissions > friends_likes"
+
 Click "Get Access Token", then "Allow". Copy and paste the Access Token.
-In your console, run "export FACEBOOK_ACCESS_TOKEN=<your access token>".
+In your console, run "export FACEBOOK_ACCESS_TOKEN=\<your access token\>".
 
 Download Cloudera's HBase distribution (CDH4 Beta 2) at
 http://archive.cloudera.com/cdh4/cdh/4/hbase-0.92.1-cdh4.0.0b2.tar.gz.
