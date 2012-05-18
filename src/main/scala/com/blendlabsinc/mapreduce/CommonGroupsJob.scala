@@ -24,7 +24,7 @@ class CommonGroupsReducer extends ToTableBinaryReducerFx(PersonTable) {
 class CommonGroupsJob extends HJob[CommonGroupsJobSettings](
   "Find common groups",
   HMapReduceTask(
-    HTaskID("Threading Task"),
+    HTaskID("Find common groups task"),
     HTaskConfigs(),
     HIO(
       HTableSettingsQuery(CommonGroupsQuery.apply),
