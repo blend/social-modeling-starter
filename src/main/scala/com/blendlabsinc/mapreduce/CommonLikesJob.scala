@@ -8,14 +8,13 @@ import com.gravity.hbase.schema._
 
 import com.blendlabsinc.models._
 import com.blendlabsinc.schema._
-
 import com.blendlabsinc.schema.PersonSchema.PersonTable
 
 class CommonLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
   val me = PersonHBaseStore.me
   val person = row.toPerson
 
-  for (like <- person.likes.intersect(me.likes).toList) {
+  for (like <- person.likes.intersect(me.likes)) {
     val keyOutput = makeWritable(_.writeUTF(person.id))
     val valueOutput = makeWritable(_.writeUTF(like.name))
     write(keyOutput, valueOutput)
@@ -24,15 +23,8 @@ class CommonLikesMapper extends FromTableBinaryMapperFx(PersonTable) {
 
 class CommonLikesReducer extends ToTableBinaryReducerFx(PersonTable) {
   val personId = readKey(_.readUTF)
-
   println(PersonHBaseStore.get(personId).get.name)
-
-  perValue {
-    valueInput => {
-      val like = valueInput.readUTF
-      println(" - " + like)
-    }
-  }
+  perValue(_.readUTF andThen (like => println(" - " + like)))
 }
 
 class CommonLikesJob extends HJob[NoSettings](
@@ -41,14 +33,10 @@ class CommonLikesJob extends HJob[NoSettings](
     HTaskID("Find common likes task"),
     HTaskConfigs(),
     HIO(
-      HTableSettingsQuery(CommonLikesQuery.apply),
+      HTableSettingsQuery((settings: NoSettings) => PersonTable.query2),
       HTableOutput(PersonTable)
     ),
     new CommonLikesMapper,
     new CommonLikesReducer
   )
 )
-
-object CommonLikesQuery {
-  def apply(settings: NoSettings) = PersonTable.query2
-}
