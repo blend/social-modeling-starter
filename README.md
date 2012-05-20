@@ -3,6 +3,12 @@ social-modeling-starter
 
 Facebook social data modeling with Scala, HBase, and HPaste.
 
+Includes accessing the Facebook Graph API in Scala via
+[Dispatch](http://dispatch.databinder.net/Dispatch.html) and [Lift
+JSON](https://github.com/lift/framework/tree/master/core/json), and
+using [HPaste](https://github.com/GravityLabs/HPaste) to access HBase
+and define MapReduce jobs.
+
 Setup
 -----------------------
 
