@@ -9,6 +9,8 @@ JSON](https://github.com/lift/framework/tree/master/core/json), and
 using [HPaste](https://github.com/GravityLabs/HPaste) to access HBase
 and define MapReduce jobs.
 
+Slides at http://blendlabsinc.com/blend-labs-tech-talk-stanford-may-2012.pdf.
+
 Setup
 -----------------------
 
